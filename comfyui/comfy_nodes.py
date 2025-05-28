@@ -69,10 +69,6 @@ class MagiTextEncoder:
     CATEGORY = "Magi"
 
     def encode(self, prompt: str, t5_pretrained_path: str, t5_device: str):
-        magi_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        special_token_path = os.path.join(magi_directory, "example/assets/special_tokens.npz")
-        os.environ["SPECIAL_TOKEN_PATH"] = special_token_path
-
         model_config = ModelConfig(model_name="videodit_ardf")
         config = MagiConfig(model_config=model_config, runtime_config=RuntimeConfig(), engine_config=EngineConfig())
         config.runtime_config.t5_pretrained = t5_pretrained_path

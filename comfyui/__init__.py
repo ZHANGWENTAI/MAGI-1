@@ -15,7 +15,10 @@
 import os
 import sys
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+magi_directory = os.path.dirname(os.path.abspath(__file__))
+special_token_path = os.path.join(magi_directory, "example/assets/special_tokens.npz")
+os.environ["SPECIAL_TOKEN_PATH"] = special_token_path
+sys.path.append(magi_directory)
 
 from .comfyui.comfy_nodes import NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS
 

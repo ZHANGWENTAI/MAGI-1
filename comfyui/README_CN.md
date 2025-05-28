@@ -5,6 +5,7 @@
 - 用手动安装的方式[下载 ComfyUI 并安装](https://github.com/comfyanonymous/ComfyUI?tab=readme-ov-file#manual-install-windows-linux)
 
 - 下载本仓库到 *ComfyUI/custom_nodes/MAGI-1* 路径并[安装相应的依赖](https://github.com/SandAI-org/MAGI-1?tab=readme-ov-file#environment-preparation)。
+
     📌 为了让ComfyUI识别到自定义节点，必须将`comfyui/__init__.py`移动到MAGI-1根目录下。
 
 - 下载 MAGI-1 模型文件到本地。在 MAGI-1 的配置文件，例如在文件`example/4.5B/4.5B_base_config.json`中（若要使用4.5B基础模型），修改模型权重的路径为本地路径。主要有以下两个文件路径需要修改：
@@ -37,7 +38,7 @@ python main.py
 用于将 prompt 文本编码成用于视频生成的文本特征（Conditioning Embedding）。
 
 * **prompt**：输入的描述文本。
-* **t5\_pretrained\_path**：T5 模型的权重路径，指向 `ckpt/t5` 目录中的预训练模型。
+* **t5\_pretrained\_path**：T5 模型权重的绝对路径，指向 `ckpt/t5` 目录中的预训练模型。
 * **t5\_device**：指定在哪个设备上加载和运行 T5 模型，可选 `"cpu"` 或 `"cuda:x"`（如 `"cuda:0"`）。
 
 ### Load Image
@@ -52,7 +53,7 @@ python main.py
 核心节点，可用于文生视频、图生视频、视频续写任务，生成对应的视频序列，并将帧率传递给后续的视频保存节点。
 
 * **task\_mode**：指定执行 *文生视频、图生视频、视频续写* 中的哪一种任务。
-* **config\_path**：模型运行所需的 JSON 配置文件路径, 例如`example/4.5B/4.5B_base_config.json`。
+* **config\_path**：模型运行所需的 JSON 配置文件的绝对路径。
 * **image\_path**：要转换为视频的图像/视频路径（绝对路径或输入目录内路径）。
 * **text\_embeddings**：文本编码器生成的嵌入特征与 mask，作为视频生成的语义引导。
 * **magi\_seed**：生成随机数的种子，用于控制模型生成的可复现性。相同的 seed 将产生相同的视频输出。默认值为 1234，取值范围 0～100000。
@@ -70,7 +71,7 @@ python main.py
 将生成的视频序列保存为本地文件。
 
 * **video**：待保存的视频张量，本质是一个 torch.Tensor。
-* **output\_path**：保存视频的完整输出路径（只允许使用 `.mp4` 后缀）。
+* **output\_path**：保存视频的绝对路径（只允许使用 `.mp4` 后缀）。
 * **fps**：视频帧率，默认为 24，支持 1\~60 的整数设置。
 
 视频将使用指定的帧率编码并写入到 `output_path`。
